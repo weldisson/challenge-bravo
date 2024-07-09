@@ -59,6 +59,70 @@ Você pode usar qualquer linguagem de programação para o desafio. Abaixo a lis
 -   A API precisa suportar um volume de 1000 requisições por segundo em um teste de estresse.
 -   A API precisa contemplar cotações de verdade e atuais através de integração com APIs públicas de cotação de moedas
 
+## Rodando localmente
+- Para executar o código localmente, siga estes passos:
+  1. Clone o repositório:
+
+    ```
+        git clone \$seu-fork
+        cd \$seu-fork
+    ```
+  2. Instale as dependências:
+
+    ```bash
+        npm install
+    ```
+  3. Copie o arquivo `.env.example` para `.env` e configure suas variáveis de ambiente necessárias, como porta de API e configurações do MongoDB.
+
+    ```bash
+        cp .env.example .env
+    ```
+  4. Inicie o MongoDB utilizando Docker Compose:
+
+    ```bash
+        docker-compose up mongo
+    ```
+  5. Inicie a aplicação:
+
+    ```bash
+        npm run dev
+    ```
+- APIs disponíveis:
+  - **Swagger**
+    http://localhost:3000/api-docs/
+    
+  - **Conversão de Moeda:**
+    ```
+        GET http://localhost:3000/api/convert/?from=USD&to=BRL&amount=100
+    ```
+  - **Adicionar Moeda:**
+    ```
+        POST http://localhost:3000/api/currencies/
+        {
+        "code": "EUR"
+        }
+    ```
+  - **Remover Moeda:**
+    ```
+        DELETE http://localhost:3000/api/currencies/
+        {
+        "code": "EUR"
+        }
+    ```
+  - **Definir Taxa de Câmbio:**
+    ```
+        POST http://localhost:3000/api/exchange-rate/
+        {
+        "from": "USD",
+        "to": "EUR",
+        "rate": 1.2
+        }
+    ```
+  - **Verificar Saúde da API:**
+    ```
+        GET http://localhost:3000/api/health
+    ```
+
 ## Critério de avaliação
 
 -   **Organização do código**: Separação de módulos, view e model, back-end e front-end

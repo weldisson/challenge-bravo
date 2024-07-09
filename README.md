@@ -59,6 +59,71 @@ You can use any programming language for the challenge. Below is the list of lan
 -   The API needs to support a volume of 1000 requests per second in a stress test.
 -   The API needs to include real and current quotes through integration with public currency quote APIs
 
+## Running Locally
+- To run the code locally, follow these steps:
+
+1. Clone the repository:
+
+    ```
+        git clone \$your-fork
+        cd \$your-fork
+    ```
+2. Install the dependencies:
+
+    ```bash
+        npm install
+    ```
+3. Copy the `.env.example` file to `.env` and set your necessary environment variables, such as API port and MongoDB settings.
+
+    ```bash
+        cp .env.example .env
+    ```
+4. Start MongoDB using Docker Compose:
+
+    ```bash
+        docker-compose up mongo
+    ```
+5. Start the application:
+
+    ```bash
+        npm run dev
+    ```
+- Available APIs:
+    - **Swagger**
+        http://localhost:3000/api-docs/
+        
+    - **Currency Conversion:**
+        ```
+            GET http://localhost:3000/api/convert/?from=USD&to=BRL&amount=100
+        ```
+    - **Add Currency:**
+    ```
+        POST http://localhost:3000/api/currencies/
+        {
+            "code": "EUR"
+        }
+    ```
+    - **Remove Currency:**
+    ```
+        DELETE http://localhost:3000/api/currencies/
+        {
+            "code": "EUR"
+        } 
+    ```
+    - **Set Exchange Rate:**
+    ```
+        POST http://localhost:3000/api/exchange-rate/
+        {
+            "from": "USD",
+            "to": "EUR",
+            "rate": 1.2
+        }
+    ```
+    - **Check API Health:**
+    ```
+        GET http://localhost:3000/api/health
+    ```
+
 ## Evaluation criteria
 
 -   **Organization of code**: Separation of modules, view and model, back-end and front-end
